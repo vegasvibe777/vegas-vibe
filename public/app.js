@@ -39,31 +39,40 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            
             try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    alert('Thank you for your message! We will get back to you soon.');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Failed to send message');
-                }
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                // Let Netlify handle the form submission
+                const formData = new FormData(contactForm);
+                
+                // Show success message
+                showModal(`
+                    <div class="success-modal">
+                        <h2><i class="fas fa-check-circle"></i> Message Sent!</h2>
+                        <p>Thank you for contacting us. We'll get back to you soon.</p>
+                        <button class="modal-btn" onclick="closeModal()">Close</button>
+                    </div>
+                `);
+                
+                // Reset form
+                contactForm.reset();
+                
             } catch (error) {
                 console.error('Contact form error:', error);
-                alert('Sorry, there was an error sending your message. Please try again later.');
+                showModal(`
+                    <div class="error-modal">
+                        <h2><i class="fas fa-exclamation-circle"></i> Error</h2>
+                        <p>Sorry, there was an error sending your message. Please try again later.</p>
+                        <button class="modal-btn" onclick="closeModal()">Close</button>
+                    </div>
+                `);
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
     }
@@ -283,14 +292,7 @@ const gameUrls = {
 document.querySelectorAll('.play-btn').forEach(button => {
     button.addEventListener('click', () => {
         const gameId = button.getAttribute('data-game');
-        const gameUrl = gameUrls[gameId];
-        
-        if (gameUrl) {
-            const iframe = document.getElementById('gameIframe');
-            iframe.src = gameUrl;
-            gameModal.style.display = 'flex';
-            document.body.classList.add('modal-open');
-        }
+        launchGame(gameId);
     });
 });
 
@@ -310,4 +312,66 @@ gameModal.addEventListener('click', (e) => {
         gameModal.style.display = 'none';
         document.body.classList.remove('modal-open');
     }
-}); 
+});
+
+function launchGame(gameId) {
+    // Check if hardware acceleration is enabled
+    const isHardwareAccelerated = () => {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) return false;
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        return debugInfo && gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) !== 'Google SwiftShader';
+    };
+
+    if (!isHardwareAccelerated()) {
+        showModal(`
+            <div class="hardware-acceleration-modal">
+                <h2><i class="fas fa-exclamation-triangle"></i> Hardware Acceleration Required</h2>
+                <p>To play our games, you need to enable hardware acceleration in your browser. Here's how:</p>
+                <div class="browser-instructions">
+                    <h3>Chrome/Edge:</h3>
+                    <ol>
+                        <li>Click the three dots (⋮) in the top right</li>
+                        <li>Go to Settings > System</li>
+                        <li>Enable "Use hardware acceleration when available"</li>
+                        <li>Restart your browser</li>
+                    </ol>
+                    <h3>Firefox:</h3>
+                    <ol>
+                        <li>Type about:config in the address bar</li>
+                        <li>Search for "layers.acceleration.force-enabled"</li>
+                        <li>Set it to "true"</li>
+                        <li>Restart your browser</li>
+                    </ol>
+                </div>
+                <button class="modal-btn" onclick="closeModal()">Got it!</button>
+            </div>
+        `);
+        return;
+    }
+
+    const gameUrl = gameUrls[gameId];
+    if (gameUrl) {
+        window.open(gameUrl, '_blank');
+    }
+}
+
+function showModal(content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = content;
+    document.body.appendChild(modal);
+
+    const closeBtn = modal.querySelector('.modal-btn');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+}
+
+function closeModal() {
+    const modal = document.querySelector('.modal');
+    if (modal) {
+        document.body.removeChild(modal);
+    }
+} 
