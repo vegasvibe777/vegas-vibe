@@ -209,22 +209,24 @@
                     <p>Have questions or concerns? We're here to help. Fill out the form below and we'll get back to you as soon as possible.</p>
                 </div>
 
-                <form name="contact" method="POST" netlify data-netlify="true">
-                    <p>
-                        <label>Name: <input type="text" name="name" /></label>
-                    </p>
-                    <p>
-                        <label>Email: <input type="email" name="email" /></label>
-                    </p>
-                    <p>
-                        <label>Subject: <input type="text" name="subject" /></label>
-                    </p>
-                    <p>
-                        <label>Message: <textarea name="message"></textarea></label>
-                    </p>
-                    <p>
-                        <button type="submit">Send Message</button>
-                    </p>
+                <form netlify name="contact" method="POST" data-netlify="true" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
                 </form>
             </div>
         </section>
