@@ -46,20 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
                 
-                // Let Netlify handle the form submission
+                // Create FormData object
                 const formData = new FormData(contactForm);
                 
-                // Show success message
-                showModal(`
-                    <div class="success-modal">
-                        <h2><i class="fas fa-check-circle"></i> Message Sent!</h2>
-                        <p>Thank you for contacting us. We'll get back to you soon.</p>
-                        <button class="modal-btn" onclick="closeModal()">Close</button>
-                    </div>
-                `);
+                // Submit to Netlify
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData
+                });
                 
-                // Reset form
-                contactForm.reset();
+                if (response.ok) {
+                    // Show success message
+                    showModal(`
+                        <div class="success-modal">
+                            <h2><i class="fas fa-check-circle"></i> Message Sent!</h2>
+                            <p>Thank you for contacting us. We'll get back to you soon.</p>
+                            <button class="modal-btn" onclick="closeModal()">Close</button>
+                        </div>
+                    `);
+                    
+                    // Reset form
+                    contactForm.reset();
+                } else {
+                    throw new Error('Failed to send message');
+                }
                 
             } catch (error) {
                 console.error('Contact form error:', error);
