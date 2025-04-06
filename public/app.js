@@ -34,29 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle contact form submission
-    const contactForm = document.getElementById('contactForm');
+    const contactForm = document.querySelector('form[name="contact"]');
     if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        contactForm.addEventListener('submit', event => {
+            event.preventDefault();
             
-            const submitBtn = contactForm.querySelector('.submit-btn');
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.textContent;
             
             try {
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
                 
-                // Create FormData object
                 const formData = new FormData(contactForm);
                 
-                // Submit to Netlify
-                const response = await fetch('/', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (response.ok) {
-                    // Show success message
+                fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(() => {
                     showModal(`
                         <div class="success-modal">
                             <h2><i class="fas fa-check-circle"></i> Message Sent!</h2>
@@ -64,13 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="modal-btn" onclick="closeModal()">Close</button>
                         </div>
                     `);
-                    
-                    // Reset form
                     contactForm.reset();
-                } else {
-                    throw new Error('Failed to send message');
-                }
-                
+                })
+                .catch(error => {
+                    console.error('Contact form error:', error);
+                    showModal(`
+                        <div class="error-modal">
+                            <h2><i class="fas fa-exclamation-circle"></i> Error</h2>
+                            <p>Sorry, there was an error sending your message. Please try again later.</p>
+                            <button class="modal-btn" onclick="closeModal()">Close</button>
+                        </div>
+                    `);
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
             } catch (error) {
                 console.error('Contact form error:', error);
                 showModal(`
@@ -80,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="modal-btn" onclick="closeModal()">Close</button>
                     </div>
                 `);
-            } finally {
                 submitBtn.textContent = originalBtnText;
                 submitBtn.disabled = false;
             }
