@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Vegas Vibe - Social Casino</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Age Verification Modal -->
+    <div id="ageVerificationModal" class="age-verification-modal">
+        <div class="age-verification-content">
+            <div class="age-verification-header">
+                <img src="18plus.webp" alt="18+ Only" class="age-verify-logo">
+                <h2>Age Verification</h2>
+            </div>
+            <div class="age-verification-body">
+                <p>The content of this website is for people aged 18 years old or more. By accessing this site, you confirm your age.</p>
+            </div>
+            <div class="age-verification-footer">
+                <button id="ageConfirmBtn" class="age-confirm-btn">
+                    <i class="fas fa-check"></i> I am 18 or older
+                </button>
+                <button id="ageDenyBtn" class="age-deny-btn">
+                    <i class="fas fa-times"></i> I am under 18
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-dice"></i>
+                Vegas Vibe
+            </div>
+            <div class="nav-links">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#games"><i class="fas fa-gamepad"></i> Games</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Vegas Vibe</h1>
+                <p>Play for fun, no real money involved</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span>10,000+ Players</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-trophy"></i>
+                        <span>6 Games</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-smile"></i>
+                        <span>100% Fun</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="games" class="games-section">
+            <h2><i class="fas fa-gamepad"></i> Our Games</h2>
+            <p class="section-description">Choose your favorite game and start playing for fun!</p>
+            <div class="games-grid">
+                <div class="game-card" data-game="cat-wilde">
+                    <div class="game-image">
+                        <img src="a5b253_a08fd86d52c540bf8c703c704067a367mv2.webp" alt="Cat Wilde in the Eclipse of the Sun God">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>Cat Wilde in the Eclipse of the Sun God</h3>
+                    <p class="game-description">Join Cat Wilde in an epic Egyptian adventure!</p>
+                    <button class="play-btn" data-game="cat-wilde">Play Now</button>
+                </div>
+                <div class="game-card" data-game="thunder-screech">
+                    <div class="game-image">
+                        <img src="1742a2_30412ad35781469ab22118b82638a6c0mv2.webp" alt="Thunder Screech">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>Thunder Screech</h3>
+                    <p class="game-description">Experience the power of the thunder bird!</p>
+                    <button class="play-btn" data-game="thunder-screech">Play Now</button>
+                </div>
+                <div class="game-card" data-game="lord-merlin">
+                    <div class="game-image">
+                        <img src="8581b6_49cf0868225245a291c81a57eb4e9d9dmv2.webp" alt="Lord Merlin and The Lady of The Lake">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>Lord Merlin and The Lady of The Lake</h3>
+                    <p class="game-description">Enter the magical world of Merlin!</p>
+                    <button class="play-btn" data-game="lord-merlin">Play Now</button>
+                </div>
+                <div class="game-card" data-game="alice-cooper">
+                    <div class="game-image">
+                        <img src="243633_4213bb57a60f47448f3168ae38a46d9amv2.webp" alt="Alice Cooper and the Tome of Madness">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>Alice Cooper and the Tome of Madness</h3>
+                    <p class="game-description">Join Alice Cooper in this thrilling slot adventure!</p>
+                    <button class="play-btn" data-game="alice-cooper">Play Now</button>
+                </div>
+                <div class="game-card" data-game="charlie-chance">
+                    <div class="game-image">
+                        <img src="c0216b_a792fcb098144bf7b274fa572aeddeecmv2.webp" alt="Charlie Chance and the Curse of Cleopatra">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>Charlie Chance and the Curse of Cleopatra</h3>
+                    <p class="game-description">Join Charlie on an Egyptian adventure!</p>
+                    <button class="play-btn" data-game="charlie-chance">Play Now</button>
+                </div>
+                <div class="game-card" data-game="wild-class">
+                    <div class="game-image">
+                        <img src="a5b253_a08fd86d52c540bf8c703c704067a367mv2.webp" alt="The Wild Class">
+                        <div class="game-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3>The Wild Class</h3>
+                    <p class="game-description">Experience the wildest classroom ever!</p>
+                    <button class="play-btn" data-game="wild-class">Play Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2><i class="fas fa-info-circle"></i> About Us</h2>
+            <div class="about-content">
+                <div class="mission-statement">
+                    <h3><i class="fas fa-star"></i> Our Mission</h3>
+                    <p>At Vegas Vibe, we're dedicated to bringing the excitement and entertainment of casino gaming to you in a safe, responsible, and completely free environment. Our platform offers the thrill of Vegas-style gaming without any financial risks.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-dice"></i>
+                        <h4>Premium Games</h4>
+                        <p>Experience top-quality games from Play'n GO, featuring stunning graphics and immersive gameplay.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Safe Gaming</h4>
+                        <p>Play with peace of mind knowing that no real money is involved. Pure entertainment, zero risk.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Play Anywhere</h4>
+                        <p>Enjoy our games on any device - desktop, tablet, or mobile. No downloads required.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Community First</h4>
+                        <p>Join thousands of players who enjoy our games daily. Share experiences and have fun together.</p>
+                    </div>
+                </div>
+
+                <div class="compliance">
+                    <h3><i class="fas fa-shield-alt"></i> Our Commitment to Responsible Gaming</h3>
+                    <p>While Vegas Vibe operates as a social casino with no real money involved, we take responsible gaming seriously. We maintain strict age verification and promote healthy gaming habits.</p>
+                    <div class="compliance-points">
+                        <div class="compliance-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Age verification required (18+)</span>
+                        </div>
+                        <div class="compliance-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No real money gambling</span>
+                        </div>
+                        <div class="compliance-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Entertainment focused platform</span>
+                        </div>
+                        <div class="compliance-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Regular platform updates</span>
+                        </div>
+                    </div>
+                    <div class="compliance-icons">
+                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-user-shield"></i>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-header">
+                    <p>Have questions or concerns? We're here to help. Fill out the form below and we'll get back to you as soon as possible.</p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="gambling-awareness">
+                <div class="responsible-gaming-logos">
+                    <img src="Dls2Y6OXgAA2_fb.png" alt="18+ Only" class="age-logo">
+                </div>
+                <p><i class="fas fa-exclamation-triangle"></i> Please gamble responsibly. This is a social casino website for entertainment purposes only. No real money is involved.</p>
+                <p>If you or someone you know has a gambling problem, please visit <a href="https://www.gamblersanonymous.org" target="_blank">Gamblers Anonymous</a> or call the National Problem Gambling Helpline at 1-800-522-4700.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-and-conditions">Terms & Conditions</a>
+                <a href="/cookie-policy">Cookie Policy</a>
+                <a href="/contact">Contact Us</a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 Vegas Vibe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 
